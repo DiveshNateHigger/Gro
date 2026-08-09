@@ -9,8 +9,14 @@ zerops:
       buildCommands:
         - git lfs install
         - git lfs pull
+        - pip install --upgrade pip
+        - pip install setuptools
+        - pip install --extra-index-url https://download.pytorch.org/whl/cpu torch torchvision
+        - pip install -r requirements.txt
       deployFiles:
         - ./
+      cache:
+        - /root/.cache/pip
     run:
       base: python@3.11
       os: ubuntu
@@ -18,10 +24,6 @@ zerops:
         - port: 8080
           protocol: TCP
           httpSupport: true
-      prepareCommands:
-        - pip install --no-cache-dir setuptools
-        - pip install --no-cache-dir --extra-index-url https://download.pytorch.org/whl/cpu torch==2.6.0 torchvision==0.21.0
-        - pip install --no-cache-dir -r requirements.txt
       start: gunicorn --bind 0.0.0.0:8080 --workers 2 --timeout 120 app:app
       envVariables:
         PYTHONUNBUFFERED: "1"
