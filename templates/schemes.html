@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+
+{% block title %}Schemes - GroWell{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-8 text-center">
+            <h1 class="display-5 fw-bold text-success mb-4">Agricultural Schemes</h1>
+            <p class="lead mb-4">
+                Discover various agricultural schemes and programs available to support farmers and gardeners.
+            </p>
+            <p class="text-muted small">
+                Data sourced from government agricultural databases and official websites.
+            </p>
+        </div>
+    </div>
+    
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card border-0 shadow">
+                <div class="card-body p-4">
+                    <h2 class="h4 text-success mb-4">Government Schemes</h2>
+                    <div class="row g-4">
+                        {% if government_schemes %}
+                            {% for scheme in government_schemes %}
+                                <div class="col-md-6 mb-4">
+                                    <div class="card h-100 border-0 shadow-sm">
+                                        <div class="card-body">
+                                            <h3 class="h5 text-success">{{ scheme.name }}</h3>
+                                            <p>{{ scheme.description }}</p>
+                                            
+                                            {% if scheme.ministry %}
+                                                <p class="small text-muted mb-2">
+                                                    <strong>Ministry:</strong> {{ scheme.ministry }}
+                                                </p>
+                                            {% endif %}
+                                            
+                                            {% if scheme.eligibility %}
+                                                <div class="mb-2">
+                                                    <strong>Eligibility:</strong>
+                                                    <p class="small mb-2">{{ scheme.eligibility }}</p>
+                                                </div>
+                                            {% endif %}
+                                            
+                                            {% if scheme.benefits %}
+                                                <div class="mb-3">
+                                                    <strong>Benefits:</strong>
+                                                    <p class="small mb-2">{{ scheme.benefits }}</p>
+                                                </div>
+                                            {% endif %}
+                                            
+                                            {% if scheme.website_url %}
+                                                <a href="{{ scheme.website_url }}" target="_blank" class="btn btn-outline-success btn-sm">Visit Official Website</a>
+                                            {% else %}
+                                                <a href="#" class="btn btn-outline-success btn-sm">Learn More</a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="col-12 text-center py-4">
+                                <p class="text-muted">No government schemes available at the moment.</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-0 shadow">
+                <div class="card-body p-4">
+                    <h2 class="h4 text-success mb-4">Financial Support Programs</h2>
+                    <div class="row g-4">
+                        {% if financial_schemes %}
+                            {% for scheme in financial_schemes %}
+                                <div class="col-md-6 mb-4">
+                                    <div class="card h-100 border-0 shadow-sm">
+                                        <div class="card-body">
+                                            <h3 class="h5 text-success">{{ scheme.name }}</h3>
+                                            <p>{{ scheme.description }}</p>
+                                            
+                                            {% if scheme.ministry %}
+                                                <p class="small text-muted mb-2">
+                                                    <strong>Ministry:</strong> {{ scheme.ministry }}
+                                                </p>
+                                            {% endif %}
+                                            
+                                            {% if scheme.eligibility %}
+                                                <div class="mb-2">
+                                                    <strong>Eligibility:</strong>
+                                                    <p class="small mb-2">{{ scheme.eligibility }}</p>
+                                                </div>
+                                            {% endif %}
+                                            
+                                            {% if scheme.benefits %}
+                                                <div class="mb-3">
+                                                    <strong>Benefits:</strong>
+                                                    <p class="small mb-2">{{ scheme.benefits }}</p>
+                                                </div>
+                                            {% endif %}
+                                            
+                                            {% if scheme.website_url %}
+                                                <a href="{{ scheme.website_url }}" target="_blank" class="btn btn-outline-success btn-sm">Visit Official Website</a>
+                                            {% else %}
+                                                <a href="#" class="btn btn-outline-success btn-sm">Learn More</a>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="col-12 text-center py-4">
+                                <p class="text-muted">No financial support programs available at the moment.</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="row mt-5">
+        <div class="col-12 text-center">
+            <p class="text-muted small">
+                <i class="fas fa-info-circle me-1"></i> 
+                Data last updated: 
+                {% if government_schemes or financial_schemes %}
+                    {{ (government_schemes[0].last_updated if government_schemes else financial_schemes[0].last_updated).strftime('%d %B, %Y') }}
+                {% else %}
+                    Not available
+                {% endif %}
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}

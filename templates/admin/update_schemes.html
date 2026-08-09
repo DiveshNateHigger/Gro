@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Schemes - Admin - GroWell{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow">
+                <div class="card-body p-4">
+                    <h1 class="h3 text-success mb-4">Update Agricultural Schemes Database</h1>
+                    
+                    <div class="alert alert-info">
+                        <i class="fas fa-info-circle me-2"></i>
+                        This page allows administrators to update the agricultural schemes database. 
+                        The system will attempt to fetch the latest data from government APIs or CSV files.
+                    </div>
+                    
+                    <div class="mb-4">
+                        <h5>Current Database Status:</h5>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center bg-light">
+                                Government Schemes
+                                <span class="badge bg-success rounded-pill">
+                                    {{ government_schemes|length if government_schemes is defined else '0' }}
+                                </span>
+                            </li>
+                            <li class="list-group-item d-flex justify-content-between align-items-center bg-light">
+                                Financial Support Programs
+                                <span class="badge bg-success rounded-pill">
+                                    {{ financial_schemes|length if financial_schemes is defined else '0' }}
+                                </span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <form method="POST" action="{{ url_for('update_schemes') }}">
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success">
+                                <i class="fas fa-sync-alt me-2"></i>
+                                Update Schemes Database
+                            </button>
+                        </div>
+                    </form>
+                    
+                    <div class="mt-4">
+                        <h5>API Configuration:</h5>
+                        <form class="row g-3">
+                            <div class="col-md-8">
+                                <label for="apiKey" class="form-label">API Key</label>
+                                <input type="password" class="form-control" id="apiKey" placeholder="Enter your API key">
+                            </div>
+                            <div class="col-md-4 d-flex align-items-end">
+                                <button type="submit" class="btn btn-outline-success w-100">Save API Key</button>
+                            </div>
+                        </form>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <h5>Alternative Data Source:</h5>
+                        <form class="row g-3">
+                            <div class="col-md-8">
+                                <label for="csvFile" class="form-label">Upload CSV File</label>
+                                <input class="form-control" type="file" id="csvFile">
+                            </div>
+                            <div class="col-md-4 d-flex align-items-end">
+                                <button type="submit" class="btn btn-outline-success w-100">Upload</button>
+                            </div>
+                        </form>
+                        <div class="mt-2">
+                            <small class="text-muted">
+                                CSV format should include: scheme_name, description, category, ministry, website_url, eligibility, benefits
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-4 text-center">
+                <a href="{{ url_for('schemes_page') }}" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left me-2"></i>
+                    Back to Schemes Page
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

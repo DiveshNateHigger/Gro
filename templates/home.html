@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+{% block title %}Home - PlantGo {% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Hero Section -->
+    <section class="py-5">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <h1 class="display-4 fw-bold text-success mb-4 main-heading">Detect Plant Diseases with AI</h1>
+                <p class="lead mb-4 para-animation">
+                    Our advanced AI system can identify diseases in various plants and crops, helping you protect your garden and improve yields.
+                </p>
+                <div class="d-flex gap-3" data-aos="zoom-in-up">
+                    <a href="{{ url_for('predict_page') }}" class="btn-green btn-diagnose btn">Diagnose Your Plant</a>
+                    <a href="{{ url_for('about_page') }}" class="btn btn-white">Learn More</a>
+                </div>
+            </div>
+            <div class="col-lg-6 mt-4 mt-lg-0" data-aos="zoom-in">
+                <img src="https://images.unsplash.com/photo-1523348837708-15d4a09cfac2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80" 
+                     alt="Healthy Plants" class="img-fluid rounded-3 shadow">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-5">
+        <h2 class="text-center mb-5 main-heading">How It Works</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm"  data-aos="fade-up"
+                data-aos-duration="400">
+                    <div class="card-body text-center p-4"  >
+                        <div class="mb-3">
+                            <i class="fas fa-camera text-success fa-3x"></i>
+                        </div>
+                        <h3 class="h5 mb-3">1. Upload a Photo</h3>
+                        <p class="card-text">Take a clear photo of your plant's affected area and upload it to our system.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm green-card" data-aos="fade-up"
+                data-aos-duration="400" >
+                    <div class="card-body text-center p-4">
+                        <div class="mb-3">
+                            <i class="fas fa-brain text-success fa-3x"></i>
+                        </div>
+                        <h3 class="h5 mb-3">2. AI Analysis</h3>
+                        <p class="card-text">Our AI model analyzes the image and identifies the disease with high accuracy.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm" data-aos="fade-up"
+                data-aos-duration="400" >
+                    <div class="card-body text-center p-4">
+                        <div class="mb-3">
+                            <i class="fas fa-leaf text-success fa-3x"></i>
+                        </div>
+                        <h3 class="h5 mb-3">3. Get Treatment Plans</h3>
+                        <p class="card-text">Receive detailed information about the disease and recommended treatments.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Plants We Can Diagnose -->
+    <section class="py-5 bg-light rounded-3 px-3">
+        <h2 class="text-center mb-5">Plants We Can Diagnose</h2>
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-6 g-4" data-aos="zoom-in">
+            {% for plant in ['Apple', 'Blueberry', 'Cherry', 'Corn', 'Grape', 'Orange', 'Peach', 'Pepper', 'Potato', 'Raspberry', 'Soybean', 'Squash', 'Strawberry', 'Tomato'] %}
+            <div class="col">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center">
+                        <h5 class="mb-0">{{ plant }}</h5>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="text-center mt-5">
+            <a href="{{ url_for('predict_page') }}" class="btn-green btn-diagnose btn">Start Diagnosis</a>
+        </div>
+    </section>
+</div>
+{% endblock %} 

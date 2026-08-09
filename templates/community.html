@@ -1,0 +1,221 @@
+{% extends 'base.html' %}
+
+{% block title %}Community - GroWell{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center mb-5">
+        <div class="col-lg-8 text-center">
+            <h1 class="display-5 fw-bold text-success mb-4">GroWell Community</h1>
+            <p class="lead mb-4">
+                Connect with fellow farmers and gardeners, share your experiences, and learn from others in our growing community.
+            </p>
+        </div>
+    </div>
+    
+    <!-- Discussion Forums Section -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card border-0 shadow">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="h4 text-success mb-0">Discussion Forums</h2>
+                        <a href="#" class="btn btn-outline-success">View All Forums</a>
+                    </div>
+                    
+                    <div class="row g-4">
+                        <!-- Forum Card 1 -->
+                        <div class="col-md-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body">
+                                    <h3 class="h5 text-success">Plant Disease Identification</h3>
+                                    <p class="text-muted small mb-2">243 members • 56 discussions</p>
+                                    <p>Share images of your plants and get help identifying diseases from experienced community members.</p>
+                                    <a href="#" class="btn btn-sm btn-outline-success">Join Discussion</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Forum Card 2 -->
+                        <div class="col-md-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body">
+                                    <h3 class="h5 text-success">Organic Farming Practices</h3>
+                                    <p class="text-muted small mb-2">187 members • 42 discussions</p>
+                                    <p>Discuss effective organic farming techniques, pest control, and soil improvement methods.</p>
+                                    <a href="#" class="btn btn-sm btn-outline-success">Join Discussion</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Forum Card 3 -->
+                        <div class="col-md-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body">
+                                    <h3 class="h5 text-success">Urban Gardening</h3>
+                                    <p class="text-muted small mb-2">212 members • 38 discussions</p>
+                                    <p>Exchange ideas and solutions for successful gardening in limited urban spaces.</p>
+                                    <a href="#" class="btn btn-sm btn-outline-success">Join Discussion</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Community Blogs Section -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card border-0 shadow">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="h4 text-success mb-0">Community Blogs</h2>
+                        <a href="#" class="btn btn-outline-success">View All Blogs</a>
+                    </div>
+                    
+                    <div class="row g-4">
+                        <!-- Blog Card 1 -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <img src="{{ url_for('static', filename='img/community/blog1.jpg') }}" class="card-img-top" alt="Blog image" onerror="this.src='https://via.placeholder.com/400x200?text=Sustainable+Farming'">
+                                <div class="card-body">
+                                    <p class="text-muted small mb-1">May 15, 2023 • By Farmer Raj</p>
+                                    <h3 class="h5 text-success">10 Sustainable Farming Practices That Actually Work</h3>
+                                    <p>Discover proven sustainable farming techniques that can improve your yields while protecting the environment.</p>
+                                    <a href="#" class="btn btn-sm btn-outline-success">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Blog Card 2 -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <img src="{{ url_for('static', filename='img/community/blog2.jpg') }}" class="card-img-top" alt="Blog image" onerror="this.src='https://via.placeholder.com/400x200?text=Disease+Prevention'">
+                                <div class="card-body">
+                                    <p class="text-muted small mb-1">April 28, 2023 • By Dr. Plant</p>
+                                    <h3 class="h5 text-success">Early Signs of Plant Diseases: What to Look For</h3>
+                                    <p>Learn how to identify the early warning signs of common plant diseases before they spread.</p>
+                                    <a href="#" class="btn btn-sm btn-outline-success">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Blog Card 3 -->
+                        <div class="col-md-6 col-lg-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <img src="{{ url_for('static', filename='img/community/blog3.jpg') }}" class="card-img-top" alt="Blog image" onerror="this.src='https://via.placeholder.com/400x200?text=Crop+Rotation'">
+                                <div class="card-body">
+                                    <p class="text-muted small mb-1">March 12, 2023 • By Green Thumb</p>
+                                    <h3 class="h5 text-success">Effective Crop Rotation Strategies for Small Farms</h3>
+                                    <p>Maximize your land's potential with these smart crop rotation plans designed for small-scale farming.</p>
+                                    <a href="#" class="btn btn-sm btn-outline-success">Read More</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Upcoming Events Section -->
+    <div class="row mb-5">
+        <div class="col-12">
+            <div class="card border-0 shadow">
+                <div class="card-body p-4">
+                    <div class="d-flex justify-content-between align-items-center mb-4">
+                        <h2 class="h4 text-success mb-0">Upcoming Events</h2>
+                        <a href="#" class="btn btn-outline-success">View All Events</a>
+                    </div>
+                    
+                    <div class="row g-4">
+                        <!-- Event Card 1 -->
+                        <div class="col-md-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="bg-success text-white rounded p-2 me-3 text-center" style="width: 60px;">
+                                            <div class="small">JUN</div>
+                                            <div class="h4 mb-0">15</div>
+                                        </div>
+                                        <h3 class="h5 text-success mb-0">Virtual Workshop: Organic Pest Control</h3>
+                                    </div>
+                                    <p><i class="fas fa-clock text-muted me-2"></i> 10:00 AM - 12:00 PM</p>
+                                    <p><i class="fas fa-video text-muted me-2"></i> Online (Zoom)</p>
+                                    <p>Learn effective organic methods to manage pests without harmful chemicals.</p>
+                                    <a href="#" class="btn btn-sm btn-outline-success">Register Now</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Event Card 2 -->
+                        <div class="col-md-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="bg-success text-white rounded p-2 me-3 text-center" style="width: 60px;">
+                                            <div class="small">JUL</div>
+                                            <div class="h4 mb-0">05</div>
+                                        </div>
+                                        <h3 class="h5 text-success mb-0">Farmer's Market Meetup</h3>
+                                    </div>
+                                    <p><i class="fas fa-clock text-muted me-2"></i> 8:00 AM - 1:00 PM</p>
+                                    <p><i class="fas fa-map-marker-alt text-muted me-2"></i> City Central Park</p>
+                                    <p>Connect with local farmers and gardeners at this community gathering.</p>
+                                    <a href="#" class="btn btn-sm btn-outline-success">RSVP</a>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Event Card 3 -->
+                        <div class="col-md-4">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-3">
+                                        <div class="bg-success text-white rounded p-2 me-3 text-center" style="width: 60px;">
+                                            <div class="small">AUG</div>
+                                            <div class="h4 mb-0">22</div>
+                                        </div>
+                                        <h3 class="h5 text-success mb-0">Soil Health Workshop</h3>
+                                    </div>
+                                    <p><i class="fas fa-clock text-muted me-2"></i> 9:00 AM - 3:00 PM</p>
+                                    <p><i class="fas fa-map-marker-alt text-muted me-2"></i> Agricultural Research Center</p>
+                                    <p>Hands-on workshop on testing and improving soil health for better crop yields.</p>
+                                    <a href="#" class="btn btn-sm btn-outline-success">Register Now</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Join Community Section -->
+    <div class="row">
+        <div class="col-12">
+            <div class="card border-0 shadow">
+                <div class="card-body p-5 text-center">
+                    <h2 class="h3 text-success mb-4">Join Our Growing Community</h2>
+                    <p class="lead mb-4">
+                        Connect with thousands of farmers and gardeners around the world. Share knowledge, get advice, and grow together.
+                    </p>
+                    <div class="row justify-content-center">
+                        <div class="col-md-6">
+                            <form class="d-flex">
+                                <input type="email" class="form-control me-2" placeholder="Your email address">
+                                <button type="submit" class="btn btn-success">Sign Up</button>
+                            </form>
+                            <p class="small text-muted mt-2">
+                                By signing up, you agree to our <a href="#" class="text-success">Terms of Service</a> and <a href="#" class="text-success">Privacy Policy</a>.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

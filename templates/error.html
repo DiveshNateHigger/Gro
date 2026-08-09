@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block title %}Error - PlantGo {% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card border-0 shadow">
+                <div class="card-body p-5 text-center">
+                    <div class="mb-4">
+                        <i class="fas fa-exclamation-triangle text-danger fa-4x"></i>
+                    </div>
+                    <h1 class="h3 mb-3">Something Went Wrong</h1>
+                    <p class="text-muted mb-4">{{ error }}</p>
+                    
+                    <div class="alert alert-light text-start mb-4">
+                        <h5 class="mb-3">Here are some possible solutions:</h5>
+                        <ul class="list-unstyled">
+                            <li class="mb-2">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                Make sure you've uploaded a clear image of a plant leaf
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                Try with a different image or angle
+                            </li>
+                            <li class="mb-2">
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                Ensure the image shows the affected area clearly
+                            </li>
+                            <li>
+                                <i class="fas fa-check-circle text-success me-2"></i>
+                                Check that your image is in a supported format (JPG, PNG)
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-center">
+                        <a href="{{ url_for('predict_page') }}" class="btn btn-primary">
+                            <i class="fas fa-upload me-2"></i>Try Again
+                        </a>
+                        <a href="{{ url_for('home') }}" class="btn btn-outline-secondary">
+                            <i class="fas fa-home me-2"></i>Back to Home
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

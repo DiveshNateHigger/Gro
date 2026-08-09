@@ -1,0 +1,19 @@
+zerops:
+  - setup: plant-disease-app
+    build:
+      base: python@3.11
+      buildCommands:
+        - pip install --upgrade pip
+        - pip install -r requirements.txt
+      deployFiles:
+        - ./
+    run:
+      base: python@3.11
+      ports:
+        - port: 8080
+          protocol: TCP
+          httpSupport: true
+      start: gunicorn --bind 0.0.0.0:8080 app:app
+      envVariables:
+        PYTHONUNBUFFERED: "1"
+        FLASK_ENV: "production"

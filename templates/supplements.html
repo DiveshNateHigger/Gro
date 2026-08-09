@@ -1,0 +1,162 @@
+{% extends 'base.html' %}
+
+{% block title %}Supplements - PlantGo{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+    <div class="text-center mb-5">
+        <h1 class="display-5 fw-bold text-success">Recommended Supplements</h1>
+        <p class="lead">
+            Find the right treatments for various plant diseases to keep your garden healthy.
+        </p>
+    </div>
+    
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card border-0 shadow">
+                <div class="card-body p-4">
+                    <div class="input-group">
+                        <span class="input-group-text bg-success text-white">
+                            <i class="fas fa-search"></i>
+                        </span>
+                        <input type="text" id="searchInput" class="form-control" placeholder="Search for supplements or diseases...">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4" id="supplementsList">
+        {% for supplement in supplements %}
+        {% if supplement.name and supplement.image_url %}
+        <div class="col-md-6 col-lg-4 supplement-item">
+            <div class="card h-100 border-0 shadow" data-aos="zoom-in-up">
+                <div class="card-body">
+                    <div class="text-center mb-3">
+                        <img src="{{ supplement.image_url }}" alt="{{ supplement.name }}" class="img-fluid rounded" style="max-height: 200px;">
+                    </div>
+                    <h4 class="card-title text-success">{{ supplement.name }}</h4>
+                    
+                    {% for disease in diseases %}
+                        {% if disease.id == supplement.disease_id %}
+                            <p class="text-muted disease-name">For: {{ disease.name }}</p>
+                        {% endif %}
+                    {% endfor %}
+                    
+                    <div class="d-grid mt-3">
+                        {% if supplement.buy_link %}
+                        <a href="{{ supplement.buy_link }}" target="_blank" class="btn btn-success">
+                            <i class="fas fa-shopping-cart me-2"></i>Buy Now
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+    </div>
+    
+    <div class="row mt-5" id="noResults" style="display: none;">
+        <div class="col-12">
+            <div class="alert alert-warning text-center">
+                <i class="fas fa-exclamation-circle me-2"></i>
+                No supplements found matching your search. Please try a different search term.
+            </div>
+        </div>
+    </div>
+    
+    <!-- Information Section -->
+    <div class="row mt-5">
+        <div class="col-md-12">
+            <div class="card border-0 shadow">
+                <div class="card-header bg-success text-white py-3">
+                    <h3 class="mb-0 h5">Choosing the Right Supplement</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row g-4">
+                        <div class="col-md-6">
+                            <div class="d-flex mb-3">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-microscope text-success fa-2x me-3 mt-1"></i>
+                                </div>
+                                <div>
+                                    <h5>Identify the Disease First</h5>
+                                    <p>Always start by accurately identifying the plant disease using our diagnostic tool. Different diseases require different treatments.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-leaf text-success fa-2x me-3 mt-1"></i>
+                                </div>
+                                <div>
+                                    <h5>Consider Organic Options</h5>
+                                    <p>When possible, choose organic treatments first, especially for edible plants. These are safer for beneficial insects and the environment.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-md-6">
+                            <div class="d-flex mb-3">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-vial text-success fa-2x me-3 mt-1"></i>
+                                </div>
+                                <div>
+                                    <h5>Follow Instructions Carefully</h5>
+                                    <p>Always follow the product instructions exactly. Overuse can harm plants and beneficial organisms in your garden.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="d-flex">
+                                <div class="flex-shrink-0">
+                                    <i class="fas fa-shield-alt text-success fa-2x me-3 mt-1"></i>
+                                </div>
+                                <div>
+                                    <h5>Preventative Measures</h5>
+                                    <p>Some supplements can be used preventatively before diseases appear, especially in plants that have suffered from diseases in previous seasons.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchInput = document.getElementById('searchInput');
+        const supplementsList = document.getElementById('supplementsList');
+        const supplementItems = document.querySelectorAll('.supplement-item');
+        const noResults = document.getElementById('noResults');
+        
+        searchInput.addEventListener('keyup', function() {
+            const searchTerm = this.value.toLowerCase();
+            let resultsFound = false;
+            
+            supplementItems.forEach(item => {
+                const supplementName = item.querySelector('.card-title').textContent.toLowerCase();
+                const diseaseName = item.querySelector('.disease-name').textContent.toLowerCase();
+                
+                if (supplementName.includes(searchTerm) || diseaseName.includes(searchTerm)) {
+                    item.style.display = 'block';
+                    resultsFound = true;
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+            
+            // Show/hide no results message
+            if (resultsFound) {
+                noResults.style.display = 'none';
+            } else {
+                noResults.style.display = 'flex';
+            }
+        });
+    });
+</script>
+{% endblock %} 

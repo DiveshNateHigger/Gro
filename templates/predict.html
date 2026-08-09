@@ -1,0 +1,199 @@
+{% extends 'base.html' %}
+
+{% block title %}Diagnose Your Plant - PlantGo{% endblock %}
+
+{% block extra_css %}
+<style>
+    .upload-box {
+        border: 2px dashed #ccc;
+        padding: 3rem;
+        text-align: center;
+        margin-bottom: 2rem;
+        border-radius: 10px;
+        transition: all 0.3s;
+    }
+    
+    .upload-box:hover {
+        border-color: #198754;
+    }
+    
+    .upload-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: #198754;
+    }
+    
+    #preview-container {
+        display: none;
+        margin-top: 20px;
+    }
+    
+    #image-preview {
+        max-width: 100%;
+        max-height: 400px;
+        border-radius: 8px;
+        object-fit: contain;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="card border-0 shadow">
+                <div class="card-body p-4">
+                    <h1 class="text-center mb-4 text-success">Diagnose Your Plant</h1>
+                    
+                    <p class="text-center mb-4">
+                        Upload a clear image of the affected part of your plant, and our AI will identify the disease and provide treatment recommendations.
+                    </p>
+                    
+                    <form action="{{ url_for('upload_file') }}" method="post" enctype="multipart/form-data" id="upload-form">
+                        <div class="upload-box" id="drop-area">
+                            <i class="fas fa-cloud-upload-alt upload-icon"></i>
+                            <h3 class="mb-3">Drag & Drop Your Image Here</h3>
+                            <p class="text-muted mb-3">or click to browse</p>
+                            
+                            <input type="file" name="image" id="file-input" accept="image/*" style="display: none;" required>
+                            <button type="button" class="btn btn-success btn-lg" id="browse-btn">Browse Files</button>
+                        </div>
+                        
+                        <div id="preview-container" class="text-center">
+                            <h4 class="mb-3">Selected Image</h4>
+                            <img id="image-preview" src="#" alt="Preview" class="mb-3">
+                            <div class="d-flex justify-content-center mt-3">
+                                <button type="button" class="btn btn-outline-danger me-2" id="remove-btn">Remove</button>
+                                <button type="submit" class="btn btn-success">Diagnose Now</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <!-- Tips Section -->
+            <div class="card border-0 shadow mt-4">
+                <div class="card-body p-4">
+                    <h3 class="mb-3">Tips for Better Results</h3>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item border-0 d-flex">
+                            <i class="fas fa-check-circle text-success me-3 mt-1"></i>
+                            <div>
+                                <strong>Clear Images:</strong> Take clear, well-lit photos of the affected areas.
+                            </div>
+                        </li>
+                        <li class="list-group-item border-0 d-flex">
+                            <i class="fas fa-check-circle text-success me-3 mt-1"></i>
+                            <div>
+                                <strong>Close-Up:</strong> Capture close-up images of the symptoms, such as spots, discoloration, or wilting.
+                            </div>
+                        </li>
+                        <li class="list-group-item border-0 d-flex">
+                            <i class="fas fa-check-circle text-success me-3 mt-1"></i>
+                            <div>
+                                <strong>Multiple Angles:</strong> If uncertain, upload multiple images from different angles.
+                            </div>
+                        </li>
+                        <li class="list-group-item border-0 d-flex">
+                            <i class="fas fa-check-circle text-success me-3 mt-1"></i>
+                            <div>
+                                <strong>Avoid Shadows:</strong> Take photos in natural light without harsh shadows.
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const dropArea = document.getElementById('drop-area');
+        const fileInput = document.getElementById('file-input');
+        const browseBtn = document.getElementById('browse-btn');
+        const removeBtn = document.getElementById('remove-btn');
+        const previewContainer = document.getElementById('preview-container');
+        const imagePreview = document.getElementById('image-preview');
+        const uploadForm = document.getElementById('upload-form');
+        
+        // When "Browse Files" button is clicked
+        browseBtn.addEventListener('click', function() {
+            fileInput.click();
+        });
+        
+        // When a file is selected via the file input
+        fileInput.addEventListener('change', function() {
+            handleFiles(this.files);
+        });
+        
+        // Drag & Drop functionality
+        ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, preventDefaults, false);
+        });
+        
+        function preventDefaults(e) {
+            e.preventDefault();
+            e.stopPropagation();
+        }
+        
+        ['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, highlight, false);
+        });
+        
+        ['dragleave', 'drop'].forEach(eventName => {
+            dropArea.addEventListener(eventName, unhighlight, false);
+        });
+        
+        function highlight() {
+            dropArea.style.borderColor = '#198754';
+            dropArea.style.backgroundColor = 'rgba(25, 135, 84, 0.05)';
+        }
+        
+        function unhighlight() {
+            dropArea.style.borderColor = '#ccc';
+            dropArea.style.backgroundColor = '';
+        }
+        
+        dropArea.addEventListener('drop', handleDrop, false);
+        
+        function handleDrop(e) {
+            const dt = e.dataTransfer;
+            const files = dt.files;
+            handleFiles(files);
+        }
+        
+        function handleFiles(files) {
+            if (files.length > 0) {
+                const file = files[0];
+                if (file.type.startsWith('image/')) {
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        imagePreview.src = e.target.result;
+                        dropArea.style.display = 'none';
+                        previewContainer.style.display = 'block';
+                    }
+                    reader.readAsDataURL(file);
+                    
+                    // Update the file input
+                    const dataTransfer = new DataTransfer();
+                    dataTransfer.items.add(file);
+                    fileInput.files = dataTransfer.files;
+                } else {
+                    alert('Please select an image file.');
+                }
+            }
+        }
+        
+        // Remove selected image
+        removeBtn.addEventListener('click', function() {
+            imagePreview.src = '';
+            fileInput.value = '';
+            previewContainer.style.display = 'none';
+            dropArea.style.display = 'block';
+        });
+    });
+</script>
+{% endblock %} 
