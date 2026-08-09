@@ -1,19 +1,22 @@
 zerops:
-  - setup: plant-disease-app
+  - setup: app
     build:
       base: python@3.11
       buildCommands:
+        - git lfs install
+        - git lfs pull
         - pip install --upgrade pip
         - pip install -r requirements.txt
       deployFiles:
         - ./
+      cache:
+        - /root/.cache/pip
     run:
       base: python@3.11
       ports:
         - port: 8080
-          protocol: TCP
           httpSupport: true
-      start: gunicorn --bind 0.0.0.0:8080 app:app
+      start: gunicorn --bind 0.0.0.0:8080 --workers 2 --timeout 120 app:app
       envVariables:
         PYTHONUNBUFFERED: "1"
         FLASK_ENV: "production"
