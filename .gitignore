@@ -28,13 +28,7 @@ wheels/
 .installed.cfg
 *.egg
 
-# Large Model weights (>100MB exceeds GitHub push limit)
-models/*.pt
-models/*.pth
-models/*.bin
-models/*.onnx
-*.pt
-*.pth
+# PyTorch Model weights are tracked via Git LFS (.gitattributes)
 
 # Database files
 *.db
