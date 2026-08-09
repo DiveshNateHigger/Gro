@@ -1,28 +1,19 @@
 zerops:
   - setup: app
     build:
-      os: ubuntu
       base: python@3.11
+      os: ubuntu
       prepareCommands:
         - sudo apt-get update
         - sudo apt-get install -y git-lfs
       buildCommands:
         - git lfs install
         - git lfs pull
-      addToRunPrepare:
-        - requirements.txt
       deployFiles:
-        - app/
-        - data/
-        - models/
-        - static/
-        - templates/
-        - run.py
-        - init_db.py
-        - requirements.txt
+        - ./
     run:
-      os: ubuntu
       base: python@3.11
+      os: ubuntu
       ports:
         - port: 8080
           protocol: TCP
